@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <inputnk rel="stylesheet" href="css/stylesheet.css">
+        <script src="js/diceware_words.json"></script>
+        <script src="js/random.min.js"></script>
+        <script src="js/scripts.js"></script>
+        <title>Diceware Password Generator</title>
+    </head>
+    <body>
+        <h1 class="center">Diceware Password Generator</h1>
+        <div class="wrapper center">
+            <div class="dice-inputs center">
+                <div class="row center">
+                <input type="text" class="dice-digit" id="1" maxlength="1" />
+                <input type="text" class="dice-digit" id="2" maxlength="1" />
+                <input type="text" class="dice-digit" id="3" maxlength="1" />
+                <input type="text" class="dice-digit" id="4" maxlength="1" />
+                <input type="text" class="dice-digit" id="5" maxlength="1" />
+                <br>
+                </div>
+
+                <div class="row center">
+                <input type="text" class="dice-digit" id="6" maxlength="1" />
+                <input type="text" class="dice-digit" id="7" maxlength="1" />
+                <input type="text" class="dice-digit" id="8" maxlength="1" />
+                <input type="text" class="dice-digit" id="9" maxlength="1" />
+                <input type="text" class="dice-digit" id="10" maxlength="1" />
+                <br>
+                </div>
+
+                <div class="row center">
+                <input type="text" class="dice-digit" id="11" maxlength="1" />
+                <input type="text" class="dice-digit" id="12" maxlength="1" />
+                <input type="text" class="dice-digit" id="13" maxlength="1" />
+                <input type="text" class="dice-digit" id="14" maxlength="1" />
+                <input type="text" class="dice-digit" id="15" maxlength="1" />
+                <br>
+                </div>
+
+                <div class="row center">
+                <input type="text" class="dice-digit" id="16" maxlength="1" />
+                <input type="text" class="dice-digit" id="17" maxlength="1" />
+                <input type="text" class="dice-digit" id="18" maxlength="1" />
+                <input type="text" class="dice-digit" id="19" maxlength="1" />
+                <input type="text" class="dice-digit" id="20" maxlength="1" />
+                <br>
+                </div>
+
+                <input type="button" id="minus" value="-"/> <input type="button" id="plus" value="+"/> <input type="button" id="clear" value="CLEAR"/> <input type="button" id="generate" value="GENERATE"/> <input type="button" id="random-fill" value="FILL"/>
+                <br>
+            </div>
+
+            <div id="generated-password"></div>
+
+            <div class="crack">TIME TO CRACK:</div>
+            <div class="options">OPTIONS:<br><br>
+                Word Separator<br>
+                <input type="radio" name="separatorType" value=" " checked/> Space (" ")<br>
+                <input type="radio" name="separatorType" value="_"/> Underscore ("_")<br>
+                <input type="radio" name="separatorType" value="-"/> Hyphen ("-")<br>
+
+                RNG Engine Type:<br>
+                <input type="radio" name="rngEngine" value="native"/>Native<br>
+                <input type="radio" name="rngEngine" value="browserCrypto"/>BrowserCrypto<br>
+                <input type="radio" name="rngEngine" value="mersenne" checked/>Mersenne<br><br>
+
+                Capitalization Pattern:<br>
+                <input type="radio" name="capitalization" value="none" checked />None<br>
+                <input type="radio" name="capitalization" value="first" />First<br>
+                <input type="radio" name="capitalization" value="random" />Random<br>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+html, body{
+    margin: 0;
+}
+
+.wrapper{
+    width: 1280px;
+    border: 1px solid black;
+}
+
+.dice-inputs{
+    width: 70%;
+    border: 1px solid red;
+}
+
+
+.center{
+    margin: 0 auto;
+}
+
+input[type="text"]{
+    height: 1em;
+    width: 50px;
+    text-align: center;
+}
