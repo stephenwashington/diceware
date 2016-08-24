@@ -4,21 +4,31 @@ html, body{
 
 .wrapper{
     width: 1280px;
-    border: 1px solid black;
 }
-
-.dice-inputs{
-    width: 70%;
-    border: 1px solid red;
-}
-
 
 .center{
+    display: table;
     margin: 0 auto;
+}
+
+.dice-inputs {
+}
+
+.text-center{
+    text-align: center;
+}
+
+#buttons {
+
+}
+
+.options{
+    margin-top: 30px;
 }
 
 input[type="text"]{
     height: 1em;
     width: 50px;
     text-align: center;
+    margin: 0 auto;
 }

@@ -1,22 +1,36 @@
 //Random.js from https://github.com/ckknight/random-js
 
+function addRow(){
+    let rowCount = parseInt(document.querySelectorAll(".row").length);
+    let inputCount = rowCount * 5;
+    let $newRow = $("<div id='" + "row" + (rowCount+1).toString() + "' class='row center'></div>");
+    for (let i = inputCount+1; i < inputCount+6; i++){
+        let $newInput = $("<input type='text' class='dice-digit' id='" + i.toString() + "' maxlength=1 />");
+        $newRow.append($newInput);
+    }
+    $newRow.append("<br>")
+    $(".dice-inputs").append($newRow);
+}
+
+function removeRow(){
+    let rowCount = parseInt(document.querySelectorAll(".row").length);
+    $("#" + "row" + rowCount.toString()).remove();
+}
+
+
 function getOptions(){
     let options = {};
-
     options["separator"] = " ";
 
-    let opts = document.getElementsByTagName("input");
-    for (var i = 0; i < opts.length; i++){
-        if(opts[i].name == "separatorType" && opts[i].checked){
-            options["separator"] = opts[i].value;
-        }
-        if(opts[i].name == "rngEngine" && opts[i].checked){
-            options["rng"] = opts[i].value;
-        }
-        if(opts[i].name == "capitalization" && opts[i].checked){
-            options["capitalize"] = opts[i].value;
-        }
-    }
+    let opts = document.getElementById("separatorType");
+    options["separator"] = opts.value;
+
+    opts = document.getElementById("rngEngine");
+    options["rng"] = opts.value
+
+    opts = document.getElementById("capitalization");
+    options["capitalize"] = opts.value;
+
     return options;
 }
 
@@ -38,6 +52,7 @@ function fillRandom(){
             inputs[i].value = Random.die(6)(rngEngine(options["rng"]));
         }
     }
+    generatePassphrase();
 }
 
 function generatePassphrase(){
@@ -58,7 +73,7 @@ function generatePassphrase(){
         }
     }
 
-    //step 2 - get word list
+    //step 2 - get the word list
     let numWords = Math.ceil(dicerolls.length / 5);
     for (let n = 0; n < numWords; n++){
         let chunk = dicerolls.slice(n*5,(n*5)+5);
@@ -91,7 +106,7 @@ function generatePassphrase(){
             passphrase += separator;
         }
     }
-    document.getElementById("generated-password").innerHTML = passphrase.slice(0,-1);
+    document.getElementById("generated-password").innerHTML = passphrase.slice(0,-1); //remove the trailing separator
 }
 
 window.onload = function(){
@@ -105,5 +120,7 @@ window.onload = function(){
     }
     document.getElementById("generate").onclick = generatePassphrase;
     document.getElementById("random-fill").onclick = fillRandom;
+    document.getElementById("minus").onclick = removeRow;
+    document.getElementById("plus").onclick = addRow;
 
 }
