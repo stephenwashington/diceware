@@ -3,82 +3,80 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="css/stylesheet.css">
-        <script src="js/diceware_words.json"></script>
-        <script src="js/random.min.js"></script>
-        <script src="js/scripts.js"></script>
-        <script src="js/jquery-3.1.0.min.js"></script>
-        <title>Diceware Password Generator</title>
+
+        <title>Diceware Passphrase Generator</title>
     </head>
+
     <body>
-        <h1 class="text-center">Diceware Password Generator</h1>
-        <h2>Generate a x word password separated by y using </h2>
         <div class="wrapper center">
-            <div class="dice-inputs center">
-                <div class="row" id="row1">
-                <input type="text" class="dice-digit" id="1" maxlength="1" />
-                <input type="text" class="dice-digit" id="2" maxlength="1" />
-                <input type="text" class="dice-digit" id="3" maxlength="1" />
-                <input type="text" class="dice-digit" id="4" maxlength="1" />
-                <input type="text" class="dice-digit" id="5" maxlength="1" />
-                </div>
+            <h1 class="text-center">Diceware Passphrase Generator</h1>
+            <h2 class="text-center">Generate a
+                <select id="numWords">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6" selected>6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
 
-                <div class="row" id="row2">
-                <input type="text" class="dice-digit" id="6" maxlength="1" />
-                <input type="text" class="dice-digit" id="7" maxlength="1" />
-                <input type="text" class="dice-digit" id="8" maxlength="1" />
-                <input type="text" class="dice-digit" id="9" maxlength="1" />
-                <input type="text" class="dice-digit" id="10" maxlength="1" />
-                </div>
+                 word passphrase separated by
 
-                <div class="row" id="row3">
-                <input type="text" class="dice-digit" id="11" maxlength="1" />
-                <input type="text" class="dice-digit" id="12" maxlength="1" />
-                <input type="text" class="dice-digit" id="13" maxlength="1" />
-                <input type="text" class="dice-digit" id="14" maxlength="1" />
-                <input type="text" class="dice-digit" id="15" maxlength="1" />
-                </div>
+                 <select id="separatorType">
+                     <option value=" " selected>spaces (" ")</option>
+                     <option value="_">underscores ("_")</option>
+                     <option value="-">dashes ("-")</option>
+                     <option value=".">periods (".")</option>
+                     <option value="">nothing ("")</option>
+                 </select>
 
-                <div class="row" id="row4">
-                <input type="text" class="dice-digit" id="16" maxlength="1" />
-                <input type="text" class="dice-digit" id="17" maxlength="1" />
-                <input type="text" class="dice-digit" id="18" maxlength="1" />
-                <input type="text" class="dice-digit" id="19" maxlength="1" />
-                <input type="text" class="dice-digit" id="20" maxlength="1" />
+             </h2>
+
+             <h2 class="text-center">
+
+                 Use the
+
+                 <select id="wordList">
+                     <option value="diceware_en" selected>Diceware (EN)</option>
+                     <option value="eff_en">EFF Wordlist (EN)</option>
+                 </select>
+
+                 wordlist and capitalize
+
+                 <select id="capitalization">
+                     <option value="none" selected>no part of any</option>
+                     <option value="first">the first letter of each</option>
+                     <option value="random">random letters of each</option>
+                 </select>
+
+                 words
+
+            </h2>
+
+            <div class="dice-input">
+                <div class="dice-inputs center" id="dice-inputs">
+                </div>
+                <div class="center buttons">
+                    <button type="button" id="clear"> CLEAR </button>
+                    <button type="button" id="generate">AUTO-GENERATE</button>
                 </div>
             </div>
 
-            <div class="center" id="buttons">
-                <input type="button" id="minus" value="-"/> <input type="button" id="plus" value="+"/> <input type="button" id="clear" value="CLEAR"/> <input type="button" id="generate" value="GENERATE"/> <input type="button" id="random-fill" value="FILL"/>
-                <br>
-            </div>
-
-            <div class="center" id="generated-password"></div>
-
-            <div class="options center">OPTIONS<br><br>
-                <select id="separatorType">
-                    <option value=" " selected>Space (" ")</option>
-                    <option value="_">Underscore ("_")</option>
-                    <option value="-">Dash("-")</option>
-                </select>
-                <br>
-
-                <select id=rngEngine>
-                    <option value="native">Native</option>
-                    <option value="rngEngine">BrowserCrypto</option>
-                    <option value="mersenne" selected>Mersenne</option>
-                </select>
-                <br>
-
-                <select id="capitalization">
-                    <option value="none" selected>None</option>
-                    <option value="first">First</option>
-                    <option value="random">Random</option>
-                </select>
-                <br>
-            </div>
-
-
-
+            <div class="center" id="generated-passphrase"></div>
         </div>
+
+        <!-- Load PRNG -->
+        <script src="js/random.min.js"></script>
+
+        <!-- Load default word list, scripts.js -->
+        <script src="data/diceware_en.json"></script>
+        <script src="js/scripts.js"></script>
+
+        <!-- Load other word lists asynchroniously -->
+        <script async src="data/eff_en.json"></script>
     </body>
 </html>

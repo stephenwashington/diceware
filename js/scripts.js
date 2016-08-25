@@ -1,87 +1,118 @@
-//Random.js from https://github.com/ckknight/random-js
+// Mersenne Twister from https://github.com/ckknight/random-js
+let rng = Random.engines.mt19937().autoSeed();
+let wordList = {};
 
-function addRow(){
-    let rowCount = parseInt(document.querySelectorAll(".row").length);
-    let inputCount = rowCount * 5;
-    let $newRow = $("<div id='" + "row" + (rowCount+1).toString() + "' class='row center'></div>");
-    for (let i = inputCount+1; i < inputCount+6; i++){
-        let $newInput = $("<input type='text' class='dice-digit' id='" + i.toString() + "' maxlength=1 />");
-        $newRow.append($newInput);
+// Draw the dice inputs
+function drawDiceInputs(){
+    let numRows = document.getElementById("numWords").value;
+    let innerHTML = "";
+    for (let i = 0; i < numRows; i++){
+        innerHTML += "<div class='row' id='row" + (i + 1).toString() + "'>";
+
+        for (let j = 1; j <= 5; j++){
+            innerHTML += "<input type='text' class='dice-digit' id='" + (i * 5 + j).toString() + "' pattern='[1-6]' maxlength='1' />";
+        }
+        innerHTML += "</div>";
     }
-    $newRow.append("<br>")
-    $(".dice-inputs").append($newRow);
+    document.getElementById("dice-inputs").innerHTML = innerHTML;
+    clearPassphrase();
 }
 
-function removeRow(){
-    let rowCount = parseInt(document.querySelectorAll(".row").length);
-    $("#" + "row" + rowCount.toString()).remove();
+// Clear all inputs
+function clearDiceInputs(){
+    let inputs = document.getElementsByTagName("input");
+    for (let i = 0; i < inputs.length; i++){
+        if (inputs[i].type == "text"){
+            inputs[i].value = "";
+        }
+    }
+    clearPassphrase();
+}
+
+// Clear the passphrase div
+function clearPassphrase(){
+    document.getElementById("generated-passphrase").innerHTML = "";
 }
 
 
+// Pull the info from the dropdowns into a JSON
 function getOptions(){
     let options = {};
     options["separator"] = " ";
 
-    let opts = document.getElementById("separatorType");
-    options["separator"] = opts.value;
+    let opts = document.getElementById("numWords");
+    options["numWords"] = parseInt(opts.value);
 
-    opts = document.getElementById("rngEngine");
-    options["rng"] = opts.value
+    opts = document.getElementById("wordList");
+    options["wordList"] = opts.value;
+
+    opts = document.getElementById("separatorType");
+    options["separator"] = opts.value;
 
     opts = document.getElementById("capitalization");
     options["capitalize"] = opts.value;
 
+
+
     return options;
 }
 
-function rngEngine(rngType){
-    if (rngType === "native"){
-        return Random.engines.nativeMath;
-    } else if (rngType === "browserCrypto"){
-        return Random.engines.browserCrypto;
-    } else if (rngType === "mersenne"){
-        return Random.engines.mt19937().autoSeed();
-    }
-}
-
+// Fill the diceroll-inputs with PRNG numbers
 function fillRandom(){
     let options = getOptions();
     let inputs = document.getElementsByTagName("input");
     for (let i = 0; i < inputs.length; i++){
         if (inputs[i].type == "text"){
-            inputs[i].value = Random.die(6)(rngEngine(options["rng"]));
+            inputs[i].value = Random.die(6)(rng);
         }
     }
+
     generatePassphrase();
 }
 
+// Given inputs and options, generate a passphrase
 function generatePassphrase(){
     let passphrase = ""
     let passphraseWords = [];
     let options = getOptions();
     let separator = options["separator"];
     let capitalize = options["capitalize"];
-    let rng = rngEngine(options["rng"]);
-    console.log(options);
+    let numWords = options["numWords"];
+    let list = options["wordList"];
+    let wordList;
+    switch (list){
+        case "eff_en":
+            wordList = eff_en;
+            break
+        default:
+            wordList = diceware_en;
+            break;
+    }
 
-    //step 1 - get the dicerolls
-    let dicerolls = [];
-    let inputs = document.getElementsByTagName("input");
-    for (let i = 0; i < inputs.length; i++){
-        if (inputs[i].type == "text"){
-            dicerolls.push(inputs[i].value);
+    //for each row, get the five inputs
+    //if all five are valid dice rolls, add a word
+    let rows = document.getElementsByClassName("row");
+    for (let i = 0; i < rows.length; i++){
+        let diceinputs = rows[i].getElementsByClassName("dice-digit");
+        let dicerolls = [];
+        let validInput = true;
+        for (let d = 0; d < diceinputs.length; d++){
+            dicerolls.push(diceinputs[d].value);
+        }
+        for (let j = 0; j < dicerolls.length; j++){
+            if (! /^[1-6]/.test(dicerolls[j])){
+                validInput = false;
+            }
+        }
+
+        if (validInput){
+            let chunk = dicerolls.join("");
+            let word = wordList[chunk];
+            passphraseWords.push(word);
         }
     }
 
-    //step 2 - get the word list
-    let numWords = Math.ceil(dicerolls.length / 5);
-    for (let n = 0; n < numWords; n++){
-        let chunk = dicerolls.slice(n*5,(n*5)+5);
-        let word = wordList[chunk.join("")];
-        passphraseWords.push(word);
-    }
-
-    //step 3 - turn word list into password
+    // Turn the word list into passphrase - obey capitalization and separators
     if (capitalize === "none"){
         for (let i = 0; i < passphraseWords.length; i++){
             passphrase += (passphraseWords[i] + separator);
@@ -106,21 +137,15 @@ function generatePassphrase(){
             passphrase += separator;
         }
     }
-    document.getElementById("generated-password").innerHTML = passphrase.slice(0,-1); //remove the trailing separator
+    document.getElementById("generated-passphrase").innerHTML = passphrase.slice(0,-1); //remove the trailing separator
 }
 
 window.onload = function(){
-    document.getElementById("clear").onclick = function(){
-        let inputs = document.getElementsByTagName("input");
-        for (let i = 0; i < inputs.length; i++){
-            if (inputs[i].type == "text"){
-                inputs[i].value = "";
-            }
-        }
-    }
-    document.getElementById("generate").onclick = generatePassphrase;
-    document.getElementById("random-fill").onclick = fillRandom;
-    document.getElementById("minus").onclick = removeRow;
-    document.getElementById("plus").onclick = addRow;
-
+    document.getElementById("clear").onclick = clearDiceInputs;
+    document.getElementById("generate").onclick = fillRandom;
+    document.getElementById("numWords").onchange = drawDiceInputs;
+    document.getElementById("separatorType").onchange = generatePassphrase;
+    document.getElementById("capitalization").onchange = generatePassphrase;
+    window.addEventListener("input", generatePassphrase);
+    drawDiceInputs(); // start with default of six words
 }
