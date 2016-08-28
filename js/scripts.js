@@ -84,6 +84,26 @@ function generatePassphrase(){
         case "eff_en":
             wordList = eff_en;
             break
+        case "diceware_ca":
+            wordList = diceware_ca;
+        case "diceware_da":
+            wordList = diceware_da;
+        case "diceware_de":
+            wordList = diceware_de;
+        case "diceware_es":
+            wordList = diceware_es;
+        case "diceware_fr":
+            wordList = diceware_fr;
+        case "diceware_ja":
+            wordList = diceware_ja;
+        case "diceware_mi":
+            wordList = diceware_mi;
+        case "diceware_nl":
+            wordList = diceware_nl;
+        case "diceware_pl":
+            wordList = diceware_pl;
+        case "diceware_sv":
+            wordList = diceware_sv;
         default:
             wordList = diceware_en;
             break;
@@ -143,6 +163,7 @@ function generatePassphrase(){
 window.onload = function(){
     document.getElementById("clear").onclick = clearDiceInputs;
     document.getElementById("generate").onclick = fillRandom;
+    document.getElementById("wordList").onchange = generatePassphrase;
     document.getElementById("numWords").onchange = drawDiceInputs;
     document.getElementById("separatorType").onchange = generatePassphrase;
     document.getElementById("capitalization").onchange = generatePassphrase;

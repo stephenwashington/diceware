@@ -9,65 +9,98 @@
 
     <body>
         <div class="wrapper center">
-            <h1 class="text-center">Diceware Passphrase Generator</h1>
-            <h2 class="text-center">Generate a
-                <select id="numWords">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6" selected>6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
+            <div class="content">
+                <h1 class="text-center">Diceware Passphrase Generator</h1>
+                <h2 class="text-center">Generate a
+                    <select id="numWords">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6" selected>6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
 
-                 word passphrase separated by
+                     word passphrase separated by
 
-                 <select id="separatorType">
-                     <option value=" " selected>spaces (" ")</option>
-                     <option value="_">underscores ("_")</option>
-                     <option value="-">dashes ("-")</option>
-                     <option value=".">periods (".")</option>
-                     <option value="">nothing ("")</option>
-                 </select>
+                     <select id="separatorType">
+                         <option value=" " selected>spaces (" ")</option>
+                         <option value="_">underscores ("_")</option>
+                         <option value="-">dashes ("-")</option>
+                         <option value=".">periods (".")</option>
+                         <option value="">nothing ("")</option>
+                     </select>
 
-             </h2>
+                 </h2>
 
-             <h2 class="text-center">
+                 <h2 class="text-center">
 
-                 Use the
+                     Use the
 
-                 <select id="wordList">
-                     <option value="diceware_en" selected>Diceware (EN)</option>
-                     <option value="eff_en">EFF Wordlist (EN)</option>
-                 </select>
+                     <select id="wordList">
+                         <option value="diceware_en" selected>Diceware - English</option>
+                         <option value="eff_en">EFF - English</option>
+                         <option value="diceware_ca" >Diceware - Catalan</option>
+                         <option value="diceware_da" >Diceware - Danish</option>
+                         <option value="diceware_nl" >Diceware - Dutch</option>
+                         <option value="diceware_fr" >Diceware - French</option>
+                         <option value="diceware_de" >Diceware - German</option>
+                         <option value="diceware_pl" >Diceware - Polish</option>
+                         <option value="diceware_mi" >Diceware - Maori</option>
+                         <option value="diceware_es" >Diceware - Spanish</option>
+                         <option value="diceware_sv"> Diceware - Swedish</option>
+                     </select>
 
-                 wordlist and capitalize
+                     wordlist and capitalize
 
-                 <select id="capitalization">
-                     <option value="none" selected>no part of any</option>
-                     <option value="first">the first letter of each</option>
-                     <option value="random">random letters of each</option>
-                 </select>
+                     <select id="capitalization">
+                         <option value="none" selected>no part of any</option>
+                         <option value="first">the first letter of each</option>
+                         <option value="random">random letters of each</option>
+                     </select>
 
-                 words
+                     words
 
-            </h2>
+                </h2>
 
-            <div class="dice-input">
-                <div class="dice-inputs center" id="dice-inputs">
+                <div class="left-side text-center">
+                    <div class="dice-inputs center" id="dice-inputs"></div>
+                    <div class="buttons center">
+                        <button type="button" id="clear"> CLEAR </button>
+                        <button type="button" id="generate">AUTO-GENERATE</button>
+                    </div>
                 </div>
-                <div class="center buttons">
-                    <button type="button" id="clear"> CLEAR </button>
-                    <button type="button" id="generate">AUTO-GENERATE</button>
+
+                <div class="right-side">
+                    <div class="center text-center" id="generated-passphrase"></div>
+                    <div class="center" id="explanation">
+
+                        * To use: Get one or more dice. Select the parameters of your password. Roll the dice, filling in the blanks on the left from left to right, top to bottom. Your password shall appear in the box above.<br><br>
+
+                        * For general questions about the Diceware method of generating passwords, please refer to the <a href="http://world.std.com/%7Ereinhold/dicewarefaq.html">Official Diceware FAQ</a> <br><br>
+
+                        * All Diceware wordlists contain a mixture of words and abbreviations that contain two or more characters, words that contain numbers (e.g. '7', '5th'), and sequences of special characters (e.g. '@', '??'). The EFF wordlist differs from the Diceware wordlists in that it 1) has no words with fewer than three letters, and 2) does not contain numbers or special characters. <br> <br>
+
+                        * <a href="http://world.std.com/%7Ereinhold/dicewarefaq.html#redundancy">Regardless of which list you choose to use</a>, Diceware recommend <a href="http://world.std.com/%7Ereinhold/dicewarefaq.html#howlong">six words</a> as the minimum length for passwords that handle sensitive information, such as encrypting files/emails. Five words is enough for passwords that protect non-sensitive information.<br> <br>
+
+                        * The auto-generator uses a <a href="https://en.wikipedia.org/wiki/Mersenne_Twister">Mersenne Twister</a> to generate pseudo-random numbers (source code <a href="https://github.com/ckknight/random-js">here</a>). This type of pseudo-random number generator is used in several modern programming languages, but is not <a href="https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator">cryptographically secure</a>, nor is it as random as using dice. I strongly recommend that you use dice to avoid the pitfalls of using computer-generated random numbers. <br><br>
+                    </div>
                 </div>
             </div>
+            <div class="footer">
+                <div class="footer-left">
+                    (c) Minerva Heavy Industries | <a href="https://github.com/stephenwashington/diceware">Source Code</a>
+                </div>
 
-            <div class="center" id="generated-passphrase"></div>
+            </div>
         </div>
+
+
+
 
         <!-- Load PRNG -->
         <script src="js/random.min.js"></script>
@@ -78,5 +111,15 @@
 
         <!-- Load other word lists asynchroniously -->
         <script async src="data/eff_en.json"></script>
+        <script async src="data/diceware_ca.json"></script>
+        <script async src="data/diceware_da.json"></script>
+        <script async src="data/diceware_de.json"></script>
+        <script async src="data/diceware_es.json"></script>
+        <script async src="data/diceware_fr.json"></script>
+        <script async src="data/diceware_ja.json"></script>
+        <script async src="data/diceware_mi.json"></script>
+        <script async src="data/diceware_nl.json"></script>
+        <script async src="data/diceware_pl.json"></script>
+        <script async src="data/diceware_sv.json"></script>
     </body>
 </html>

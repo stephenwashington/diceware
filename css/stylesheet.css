@@ -13,14 +13,20 @@
 html, body{
     margin: 0;
     font-family: 'OpenSans', sans-serif;
+    background-color: #f6f6f6;
 }
 
 .wrapper{
     width: 1280px;
 }
 
+.content{
+    width: 100%;
+    height: auto;
+    overflow: auto;
+}
+
 .center{
-    display: table;
     margin: 0 auto;
 }
 
@@ -32,22 +38,41 @@ html, body{
     text-align: center;
 }
 
-.dice-input{
+.left-side{
     float: left;
-    width: 40%;
+    width: 512px;
+    padding-top: 10px;
+}
+
+.right-side{
+    float: right;
+    width: 760px;
 }
 
 #generated-passphrase{
-    margin-top: 50px;
-    text-align: center;
-    font-size: 2em;
-    float: right;
-    width: 55%;
-    height: auto;
+    /*margin-top: 30px;*/
+    padding: 0 5px;
+    background-color: #ddd;
+    font-size: 24px;
+    height: 3em;
+    width: 700px;
+    vertical-align: middle;
+    border: 1px solid #969aad;
+    vertical-align: middle;
+    background-color: #fff;
+}
+
+#explanation{
+    width: 600px;
+    padding-top: 20px;
 }
 
 .buttons{
-    margin-top: 20px;
+    padding-top: 20px;
+    margin: 0 auto;
+}
+h2{
+    line-height: 1em;
 }
 
 button {
@@ -78,7 +103,7 @@ input[type="text"] {
     padding: 10px;
     font-size: 1.5em;
     margin-right: 15px;
-    border: none;
+    border: 1px solid #969aad;
     border-bottom: solid 2px #a0a0a0;
     transition: border 0.3s;
     text-align: center;
@@ -87,4 +112,19 @@ input[type="text"] {
 input[type="text"]:focus,
 input[type="text"].focus {
     border-bottom: solid 2px #1e1e1e;
+}
+
+.footer{
+    clear: both;
+    overflow: auto;
+    padding-top: 50px;
+    color: #777;
+    height: 50px;
+    width: 100%;
+    font-size: smaller;
+}
+
+a{
+    text-decoration: none;
+    color: #0074d9
 }
