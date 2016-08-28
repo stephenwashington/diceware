@@ -2,9 +2,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="css/stylesheet.css">
-
+        <meta content="en" http-equiv="Content-Language">
+        <meta content="Simple Diceware Passphrase Generation" name="description">
         <title>Diceware Passphrase Generator</title>
+        <link rel="stylesheet" href="css/stylesheet.css">
     </head>
 
     <body>
@@ -81,7 +82,7 @@
 
                         * To use: Grab one or more dice. Tune the parameters of your passphrase with the select boxes above. Roll the dice, filling in the blanks on the left from left to right, top to bottom.  Your passphrase shall appear in the box above. The 'auto-generate' button will 'roll' dice for you to make a passphrase.<br><br>
 
-                        * All Diceware wordlists contain a mixture of words and abbreviations that contain two or more characters, words that contain numbers (7, 5th, 1999), and sequences of special characters (m&m, @, ??). The EFF wordlist differs from the Diceware wordlists in that it 1) has no words with fewer than three letters, and 2) does not contain numbers or special characters. For those looking for <a href="https://xkcd.com/936/">XKCD-style passwords</a>, use the EFF wordlist.<br><br>
+                        * All Diceware wordlists contain a mixture of words and abbreviations that contain two or more characters, words that contain numbers (7, 5th, 1999), and sequences of special characters (m&m, @, ??). The EFF wordlist differs from the Diceware wordlists in that it 1) has no words with fewer than three letters, and 2) does not contain numbers or special characters. For those looking for <a href="https://xkcd.com/936/">XKCD-style passphrases</a>, use the EFF wordlist.<br><br>
 
                         * <a href="http://world.std.com/%7Ereinhold/dicewarefaq.html#redundancy">Regardless of which list you choose to use</a>, Diceware recommends <a href="http://world.std.com/%7Ereinhold/dicewarefaq.html#howlong">six words</a> as the minimum length for passphrases that handle sensitive information, such as encrypting files/emails. Five words is enough for passphrases that protect non-sensitive information.<br><br>
 
@@ -97,16 +98,11 @@
             </div>
         </div>
 
-
-
-
-        <!-- Load PRNG -->
+        <!-- Load critical javascript -->
         <script src="js/random.min.js"></script>
-
-        <!-- Load default word list, scripts.js -->
         <script src="data/diceware_en.min.js"></script>
         <script src="js/scripts.js"></script>
-
+        
         <!-- Load other word lists asynchroniously -->
         <script async src="data/eff_en.min.js"></script>
         <script async src="data/diceware_ca.min.js"></script>
@@ -119,5 +115,15 @@
         <script async src="data/diceware_nl.min.js"></script>
         <script async src="data/diceware_pl.min.js"></script>
         <script async src="data/diceware_sv.min.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-82657627-2', 'auto');
+          ga('send', 'pageview');
+
+        </script>
     </body>
 </html>
