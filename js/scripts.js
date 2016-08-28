@@ -1,6 +1,5 @@
-// Mersenne Twister from https://github.com/ckknight/random-js
-let rng = Random.engines.mt19937().autoSeed();
-let wordList = {};
+// Uniform CSPRNG from https://github.com/ckknight/random-js
+let rng = Random.engines.browserCrypto;
 
 // Draw the dice inputs
 function drawDiceInputs(){

@@ -47,18 +47,19 @@ html, body{
 .right-side{
     float: right;
     width: 760px;
+    padding-top: 10px;
 }
 
 #generated-passphrase{
     /*margin-top: 30px;*/
-    padding: 0 5px;
+    padding: 15px;
     background-color: #ddd;
     font-size: 24px;
-    height: 3em;
+    height: auto;
+    min-height: 33px;
     width: 700px;
-    vertical-align: middle;
+    vertical-align: bottom;
     border: 1px solid #969aad;
-    vertical-align: middle;
     background-color: #fff;
 }
 
