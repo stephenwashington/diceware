@@ -85,24 +85,34 @@ function generatePassphrase(){
             break
         case "diceware_ca":
             wordList = diceware_ca;
+            break;
         case "diceware_da":
             wordList = diceware_da;
+            break;
         case "diceware_de":
             wordList = diceware_de;
+            break;
         case "diceware_es":
             wordList = diceware_es;
+            break;
         case "diceware_fr":
             wordList = diceware_fr;
+            break;
         case "diceware_ja":
             wordList = diceware_ja;
+            break;
         case "diceware_mi":
             wordList = diceware_mi;
+            break;
         case "diceware_nl":
             wordList = diceware_nl;
+            break;
         case "diceware_pl":
             wordList = diceware_pl;
+            break;
         case "diceware_sv":
             wordList = diceware_sv;
+            break;
         default:
             wordList = diceware_en;
             break;
