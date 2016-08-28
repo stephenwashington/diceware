@@ -1,4 +1,4 @@
-let eff_en = {
+var eff_en = {
     "11111":  "abacus",
     "11112":  "abdomen",
     "11113":  "abdominal",

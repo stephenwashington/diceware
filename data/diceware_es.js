@@ -1,4 +1,4 @@
-let diceware_es = {
+var diceware_es = {
     "11111":  "0",
     "11112":  "1",
     "11113":  "2",
