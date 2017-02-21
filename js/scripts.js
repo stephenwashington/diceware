@@ -166,7 +166,13 @@ function generatePassphrase(){
             passphrase += separator;
         }
     }
-    document.getElementById("generated-passphrase").innerHTML = passphrase.slice(0,-1); //remove the trailing separator
+
+    //remove last trailing separator, if it's there
+    if (separator !== ""){
+        passphrase = passphrase.slice(0,-1);
+    }
+
+    document.getElementById("generated-passphrase").innerHTML = passphrase;
 }
 
 window.onload = function(){
